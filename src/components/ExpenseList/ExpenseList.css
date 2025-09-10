@@ -5,13 +5,13 @@
   padding: 24px;
   margin-bottom: 32px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
 }
 
 .expense-list h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #1F2937;
+  color: #1f2937;
   margin: 0 0 24px 0;
 }
 
@@ -21,21 +21,22 @@
   align-items: center;
   margin-bottom: 24px;
   padding: 16px;
-  background: #F9FAFB;
+  background: #f9fafb;
   border-radius: 8px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid #e5e7eb;
+  color: #374151;
 }
 
 .expense-summary h2 {
   font-size: 20px;
   font-weight: bold;
-  color: #4F46E5;
+  color: #4f46e5;
   margin: 0;
 }
 
 .expense-summary select {
   padding: 8px 12px;
-  border: 1px solid #D1D5DB;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 14px;
   background: white;
@@ -45,12 +46,12 @@
 }
 
 .expense-summary select:hover {
-  border-color: #4F46E5;
+  border-color: #4f46e5;
 }
 
 .expense-summary select:focus {
   outline: none;
-  border-color: #4F46E5;
+  border-color: #4f46e5;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
 }
 
@@ -58,7 +59,7 @@
 .expense-list-empty {
   text-align: center;
   padding: 40px 20px;
-  color: #6B7280;
+  color: #6b7280;
 }
 
 .expense-list-empty p {
@@ -72,13 +73,13 @@
     padding: 16px;
     margin-bottom: 20px;
   }
-  
+
   .expense-summary {
     flex-direction: column;
     gap: 16px;
     text-align: center;
   }
-  
+
   .expense-summary select {
     width: 100%;
     max-width: 200px;
