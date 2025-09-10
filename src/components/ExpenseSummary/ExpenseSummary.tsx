@@ -1,6 +1,6 @@
 // src/components/ExpenseSummary/ExpenseSummary.tsx
-import React from 'react';
-import './ExpenseSummary.css';
+import React from "react";
+import "./ExpenseSummary.css";
 
 /**
  * Displays summary statistics for expenses including total amount and count
@@ -14,15 +14,14 @@ interface ExpenseSummaryProps {
   expenseCount: number;
   period?: string;
 }
-
-const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({ 
-  totalAmount, 
-  expenseCount, 
-  period = "All Time" 
-}) => {
-  const formattedTotal = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
+function ExpenseSummary({
+  totalAmount,
+  expenseCount,
+  period = "All Time",
+}: ExpenseSummaryProps) {
+  const formattedTotal = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
   }).format(totalAmount);
 
   return (
@@ -31,13 +30,13 @@ const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({
         <h2>Expense Summary</h2>
         <span className="summary-period">{period}</span>
       </div>
-      
+
       <div className="summary-stats">
         <div className="stat-item">
           <span className="stat-label">Total Spent</span>
           <span className="stat-value">{formattedTotal}</span>
         </div>
-        
+
         <div className="stat-item">
           <span className="stat-label">Expenses</span>
           <span className="stat-value">{expenseCount}</span>
@@ -45,6 +44,6 @@ const ExpenseSummary: React.FC<ExpenseSummaryProps> = ({
       </div>
     </section>
   );
-};
+}
 
 export default ExpenseSummary;

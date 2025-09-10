@@ -1,5 +1,5 @@
 // src/components/ExpenseList/ExpenseList.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import ExpenseCard from "../ExpenseCard/ExpenseCard";
 import type { ExpenseCardProps } from "../ExpenseCard/ExpenseCard";
 import "./ExpenseList.css";
@@ -21,9 +21,8 @@ interface ExpenseListProps {
  * @param {ExpenseListProps} props - Component props
  * @returns {JSX.Element} Rendered expense list with filtering controls
  */
-
-const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
-  // ONLY manage UI state (filtering) - NOT expense data
+function ExpenseList({expenses}: ExpenseListProps){
+  //Current filter category as a string
   const [filterCategory, setFilterCategory] = useState<string>("All");
 
   // Filter expenses from props (not local state)
@@ -37,11 +36,6 @@ const ExpenseList: React.FC<ExpenseListProps> = ({ expenses }) => {
     (sum, expense) => sum + expense.amount,
     0
   );
-
-  /**
-   * Handles category filter change from select dropdown
-   * @param {React.ChangeEvent<HTMLSelectElement>} event - Select change event
-   */
 
   return (
     <div className="expense-list">

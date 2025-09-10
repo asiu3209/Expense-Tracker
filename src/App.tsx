@@ -42,11 +42,12 @@ function App() {
    * This function is passed down to ExpenseForm component
    * @param {Omit<Expense, 'id'>} expenseData - New expense data without ID
    */
-  function handleAddExpense(expenseData: Omit<Expense, "id">): void{
+  function handleAddExpense(expenseData: Omit<Expense, "id">): void {
     const newExpense: Expense = {
-      ...expenseData, id: Date.now(),
+      ...expenseData,
+      id: Date.now(),
     };
-    setExpenses(prev => [...prev, newExpense]);
+    setExpenses((prev) => [...prev, newExpense]);
   }
 
   const totalAmount = expenses.reduce(
