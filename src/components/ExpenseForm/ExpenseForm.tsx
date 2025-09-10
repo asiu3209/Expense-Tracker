@@ -1,6 +1,6 @@
 // src/components/ExpenseForm/ExpenseForm.tsx
-import React, { useState } from 'react';
-import './ExpenseForm.css';
+import React, { useState } from "react";
+import "./ExpenseForm.css";
 
 // Form data interface
 interface ExpenseFormData {
@@ -23,29 +23,14 @@ interface ExpenseFormProps {
     date: string;
   }) => void;
 }
-
-const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
+function ExpenseForm({ onSubmit }: ExpenseFormProps) {
   // Form state using controlled components pattern
   const [formData, setFormData] = useState<ExpenseFormData>({
-    description: '',
-    amount: '',
-    category: 'Food',
-    date: new Date().toISOString().split('T')[0] // Today's date as default
+    description: "",
+    amount: "",
+    category: "Food",
+    date: new Date().toISOString().split("T")[0], // Today's date as default
   });
-
-  /**
-   * Handles input changes for all form fields using computed property names
-   * @param {React.ChangeEvent<HTMLInputElement | HTMLSelectElement>} e - Change event from form inputs
-   */
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ): void => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   /**
    * Handles form submission with validation and data processing
@@ -53,16 +38,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
    */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.description.trim() || !formData.amount || !formData.date) {
-      alert('Please fill in all required fields');
+      alert("Please fill in all required fields");
       return;
     }
 
     const amount = parseFloat(formData.amount);
     if (amount <= 0) {
-      alert('Amount must be greater than 0');
+      alert("Amount must be greater than 0");
       return;
     }
 
@@ -71,22 +56,22 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
       description: formData.description.trim(),
       amount: amount,
       category: formData.category,
-      date: formData.date
+      date: formData.date,
     });
 
     // Reset form after successful submission
     setFormData({
-      description: '',
-      amount: '',
-      category: 'Food',
-      date: new Date().toISOString().split('T')[0]
+      description: "",
+      amount: "",
+      category: "Food",
+      date: new Date().toISOString().split("T")[0],
     });
   };
 
   return (
     <form className="expense-form" onSubmit={handleSubmit}>
       <h3>Add New Expense</h3>
-      
+
       <div className="form-group">
         <label htmlFor="description">Description *</label>
         <input
@@ -94,7 +79,9 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
           id="description"
           name="description"
           value={formData.description}
-          onChange={handleInputChange}
+          onChange={(e) =>
+            setFormData({ ...formData, description: e.target.value })
+          }
           placeholder="What did you spend money on?"
           required
         />
@@ -108,7 +95,9 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
             id="amount"
             name="amount"
             value={formData.amount}
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setFormData({ ...formData, amount: e.target.value })
+            }
             placeholder="0.00"
             step="0.01"
             min="0"
@@ -122,7 +111,9 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
             id="category"
             name="category"
             value={formData.category}
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setFormData({ ...formData, category: e.target.value })
+            }
           >
             <option value="Food">Food</option>
             <option value="Transportation">Transportation</option>
@@ -140,7 +131,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
           id="date"
           name="date"
           value={formData.date}
-          onChange={handleInputChange}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
           required
         />
       </div>
@@ -150,6 +141,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onSubmit }) => {
       </button>
     </form>
   );
-};
+}
 
 export default ExpenseForm;

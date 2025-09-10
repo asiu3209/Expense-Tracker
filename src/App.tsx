@@ -1,4 +1,3 @@
-// src/App.tsx - Updated with centralized state management
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import ExpenseSummary from "./components/ExpenseSummary/ExpenseSummary";
@@ -43,13 +42,12 @@ function App() {
    * This function is passed down to ExpenseForm component
    * @param {Omit<Expense, 'id'>} expenseData - New expense data without ID
    */
-  const handleAddExpense = (expenseData: Omit<Expense, "id">): void => {
+  function handleAddExpense(expenseData: Omit<Expense, "id">): void{
     const newExpense: Expense = {
-      ...expenseData,
-      id: Date.now(),
+      ...expenseData, id: Date.now(),
     };
-    setExpenses((prev) => [...prev, newExpense]);
-  };
+    setExpenses(prev => [...prev, newExpense]);
+  }
 
   const totalAmount = expenses.reduce(
     (sum, expense) => sum + expense.amount,
@@ -72,8 +70,6 @@ function App() {
           />
 
           <ExpenseForm onSubmit={handleAddExpense} />
-
-          {/* FIXED: Pass expenses directly, not as initialExpenses */}
           <ExpenseList expenses={expenses} />
         </main>
       </div>
