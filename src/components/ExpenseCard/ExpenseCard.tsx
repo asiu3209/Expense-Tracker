@@ -1,26 +1,43 @@
 // src/components/ExpenseCard/ExpenseCard.tsx
 import "./ExpenseCard.css";
 
-// TypeScript interface defines the structure of props this component expects
-// This acts like a contract - any parent component must provide these exact properties
+//Type restriction for inputs
+export type ExpenseCategory =
+  | "Food"
+  | "Transportation"
+  | "Entertainment"
+  | "Other";
 export interface ExpenseCardProps {
-  id: number; // Unique identifier for each expense
+  id: string; // Unique identifier for each expense
   description: string; // What the expense was for (e.g., "Lunch at Joe's Pizza")
   amount: number; // Cost in dollars (will be formatted to show currency)
-  category: string; // Type of expense (e.g., "Food", "Transportation")
+  category: ExpenseCategory; // Type of expense (e.g., "Food", "Transportation")
   date: string; // When the expense occurred (formatted as string)
+  onDelete?: (id: string) => void;
+  onEdit?: (id: string) => void;
+  showCategory?: boolean;
+  highlighted?: boolean;
 }
 
 /**
  * Displays a single expense item with formatted currency and professional styling
  * @param {Object} props - Component props
- * @param {number} props.id - Unique identifier for the expense entry
+ * @param {string} props.id - Unique identifier for the expense entry
  * @param {string} props.description - Human-readable description of the expense
  * @param {number} props.amount - Expense amount in dollars (will be formatted as currency)
  * @param {string} props.category - Expense category for organization and filtering
  * @param {string} props.date - Date when expense occurred (ISO string format)
  */
-function ExpenseCard({ id, description, amount, category, date } : ExpenseCardProps){
+function ExpenseCard({
+  id,
+  description,
+  amount,
+  category,
+  date,
+  onDelete,
+  highlighted = false, //future implementation
+  showCategory = true, //future implementation
+}: ExpenseCardProps) {
   // Format currency for professional display
   const formattedAmount = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -34,6 +51,14 @@ function ExpenseCard({ id, description, amount, category, date } : ExpenseCardPr
     year: "numeric",
   });
 
+  //Handles deleting expense card if option is available
+  function handleDelete(e: React.MouseEvent) {
+    e.stopPropagation();
+    if (onDelete) {
+      onDelete(id);
+    }
+  }
+
   return (
     <article className="expense-card">
       <div className="expense-header">
@@ -43,9 +68,19 @@ function ExpenseCard({ id, description, amount, category, date } : ExpenseCardPr
         </time>
       </div>
 
-      <div className="expense-body">
+      <div className="">
         <h3 className="expense-description">{description}</h3>
         <p className="expense-amount">{formattedAmount}</p>
+
+        {onDelete && (
+            <button
+            className="expense-delete-btn"
+            onClick={handleDelete}
+            aria-label="Delete-expense"
+            >
+            Delete
+            </button>
+        )}
       </div>
     </article>
   );

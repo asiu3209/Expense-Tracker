@@ -1,60 +1,52 @@
-// src/components/ExpenseList/ExpenseList.tsx
 import { useState } from "react";
 import ExpenseCard from "../ExpenseCard/ExpenseCard";
-import type { ExpenseCardProps } from "../ExpenseCard/ExpenseCard";
-import "./ExpenseList.css";
+import type { ExpenseCardProps, ExpenseCategory } from "../ExpenseCard/ExpenseCard";
 
 // Type for expense data (reusing interface from ExpenseCard)
 type Expense = ExpenseCardProps;
+type FilterCategory = "All" | ExpenseCategory;
 
-/**
- * Props interface for ExpenseList component
- * FIXED: expenses is now required (not optional initialExpenses)
- * @interface ExpenseListProps
- * @property {Expense[]} expenses - Current expense data from parent component (App.tsx)
- */
 interface ExpenseListProps {
-  expenses: Expense[]; // FIXED: Required prop, receives current state from App
+  expenses: Expense[];
+  deleteExpense?: (id: string) => void;
 }
 
-/**
- * @param {ExpenseListProps} props - Component props
- * @returns {JSX.Element} Rendered expense list with filtering controls
- */
-function ExpenseList({expenses}: ExpenseListProps){
-  //Current filter category as a string
-  const [filterCategory, setFilterCategory] = useState<string>("All");
+function ExpenseList({ expenses, deleteExpense }: ExpenseListProps) {
+  const [filterCategory, setFilterCategory] = useState<FilterCategory>("All");
 
-  // Filter expenses from props (not local state)
   const filteredExpenses =
     filterCategory === "All"
-      ? expenses // Use expenses from props
+      ? expenses
       : expenses.filter((expense) => expense.category === filterCategory);
 
-  // Calculate total for the currently filtered expenses
   const filteredTotal = filteredExpenses.reduce(
     (sum, expense) => sum + expense.amount,
     0
   );
 
   return (
-    <div className="expense-list">
-      <div className="expense-controls">
-        <h2>Your Expenses</h2>
+    <div className="bg-white rounded-lg p-6 md:p-6 mb-8 shadow-md border border-gray-200">
+      {/* Header */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold text-gray-900">Your Expenses</h2>
       </div>
 
-      <div className="expense-summary">
-        <p>
+      {/* Summary & Filter */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg text-gray-700">
+        <p className="text-gray-800 font-semibold">
           Total: ${filteredTotal.toFixed(2)} ({filteredExpenses.length}{" "}
-          expenses)
+          {filteredExpenses.length === 1 ? "expense" : "expenses"})
         </p>
-        <div className="filter-controls">
-          <label htmlFor="category-filter">Filter by category:</label>
+
+        <div className="flex flex-col md:flex-row md:items-center gap-2">
+          <label htmlFor="category-filter" className="text-gray-700 font-medium">
+            Filter by category:
+          </label>
           <select
             id="category-filter"
             value={filterCategory}
-            onChange={(e) => setFilterCategory(e.target.value)}
-            className="category-select"
+            onChange={(e) => setFilterCategory(e.target.value as FilterCategory)}
+            className="px-3 py-2 border border-gray-300 rounded-md text-gray-700 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           >
             <option value="All">All Categories</option>
             <option value="Food">Food</option>
@@ -65,19 +57,29 @@ function ExpenseList({expenses}: ExpenseListProps){
         </div>
       </div>
 
-      <div className="expense-items">
+      {/* Expense Items / Empty State */}
+      <div className="flex flex-col gap-4">
         {filteredExpenses.length === 0 ? (
-          <p className="no-expenses">
-            No expenses found. Add some expenses to get started!
-          </p>
+          <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 text-center mt-4">
+            <p className="text-gray-600 text-lg font-medium mb-2">
+              No expenses found.
+            </p>
+            <p className="text-gray-500 text-sm">
+              Add some expenses to get started!
+            </p>
+          </div>
         ) : (
           filteredExpenses.map((expense) => (
-            <ExpenseCard key={expense.id} {...expense} />
+            <ExpenseCard
+              key={expense.id}
+              {...expense}
+              onDelete={deleteExpense}
+            />
           ))
         )}
       </div>
     </div>
   );
-};
+}
 
 export default ExpenseList;

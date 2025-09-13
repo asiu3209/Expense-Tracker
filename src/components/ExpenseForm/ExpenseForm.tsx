@@ -1,71 +1,91 @@
 // src/components/ExpenseForm/ExpenseForm.tsx
 import React, { useState } from "react";
 import "./ExpenseForm.css";
+import type { ExpenseCategory } from "../ExpenseCard/ExpenseCard";
 
 // Form data interface
 interface ExpenseFormData {
   description: string;
   amount: string;
-  category: string;
+  category: ExpenseCategory;
   date: string;
 }
 
-/**
- * Form component for creating new expense entries with validation
- * @param {Object} props - Component props
- * @param {function} props.onSubmit - Callback function when form is submitted, receives expense data
- */
+interface FormErrors {
+  description?: string;
+  amount?: string;
+  category?: string;
+  date?: string;
+}
+
 interface ExpenseFormProps {
   onSubmit: (expenseData: {
     description: string;
     amount: number;
-    category: string;
+    category: ExpenseCategory;
     date: string;
   }) => void;
 }
+
 function ExpenseForm({ onSubmit }: ExpenseFormProps) {
   // Form state using controlled components pattern
   const [formData, setFormData] = useState<ExpenseFormData>({
     description: "",
     amount: "",
     category: "Food",
-    date: new Date().toISOString().split("T")[0], // Today's date as default
+    date: new Date().toISOString().split("T")[0],
   });
 
-  /**
-   * Handles form submission with validation and data processing
-   * @param {React.FormEvent<HTMLFormElement>} e - Form submission event
-   */
+  // Track validation errors
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  // Validation function
+  function validateForm(info: ExpenseFormData): FormErrors {
+    const validationErrors: FormErrors = {};
+    if (!info.description.trim()) {
+      validationErrors.description = "An expense description is required.";
+    }
+    if (!info.amount || parseFloat(info.amount) <= 0) {
+      validationErrors.amount = "Amount must be greater than 0.";
+    }
+    if (!info.date) {
+      validationErrors.date = "Date is required.";
+    }
+    if (!info.category) {
+      validationErrors.category = "Category is required.";
+    }
+    return validationErrors;
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    // Basic validation
-    if (!formData.description.trim() || !formData.amount || !formData.date) {
-      alert("Please fill in all required fields");
-      return;
+    // Validate before submitting
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return; // stop submission
     }
 
+    // Parse amount safely
     const amount = parseFloat(formData.amount);
-    if (amount <= 0) {
-      alert("Amount must be greater than 0");
-      return;
-    }
 
     // Submit processed data
     onSubmit({
       description: formData.description.trim(),
-      amount: amount,
+      amount,
       category: formData.category,
       date: formData.date,
     });
 
-    // Reset form after successful submission
+    // Reset form + errors
     setFormData({
       description: "",
       amount: "",
       category: "Food",
       date: new Date().toISOString().split("T")[0],
     });
+    setErrors({});
   };
 
   return (
@@ -83,8 +103,10 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             setFormData({ ...formData, description: e.target.value })
           }
           placeholder="What did you spend money on?"
-          required
         />
+        {errors.description && (
+          <span className="error">{errors.description}</span>
+        )}
       </div>
 
       <div className="form-row">
@@ -101,18 +123,21 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             placeholder="0.00"
             step="0.01"
             min="0"
-            required
           />
+          {errors.amount && <span className="error">{errors.amount}</span>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="category">Category</label>
+          <label htmlFor="category">Category *</label>
           <select
             id="category"
             name="category"
             value={formData.category}
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData({
+                ...formData,
+                category: e.target.value as ExpenseCategory,
+              })
             }
           >
             <option value="Food">Food</option>
@@ -121,19 +146,20 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             <option value="Shopping">Shopping</option>
             <option value="Other">Other</option>
           </select>
+          {errors.category && <span className="error">{errors.category}</span>}
         </div>
       </div>
 
       <div className="form-group">
-        <label htmlFor="date">Date</label>
+        <label htmlFor="date">Date *</label>
         <input
           type="date"
           id="date"
           name="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          required
         />
+        {errors.date && <span className="error">{errors.date}</span>}
       </div>
 
       <button type="submit" className="submit-button">
