@@ -1,4 +1,3 @@
-/* src/components/ExpenseCard/ExpenseCard.css */
 .expense-card {
   background: white;
   border-radius: 8px;
@@ -6,7 +5,7 @@
   margin-bottom: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
-  border-left: 4px solid #4F46E5;
+  border-left: 4px solid #4f46e5;
 }
 
 .expense-card:hover {
@@ -22,7 +21,7 @@
 }
 
 .expense-category {
-  background: #4F46E5;
+  background: #4f46e5;
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
@@ -32,7 +31,7 @@
 }
 
 .expense-date {
-  color: #6B7280;
+  color: #6b7280;
   font-size: 14px;
 }
 
@@ -40,7 +39,7 @@
   margin: 0 0 8px 0;
   font-size: 16px;
   font-weight: 500;
-  color: #1F2937;
+  color: #1f2937;
 }
 
 .expense-amount {
@@ -48,4 +47,24 @@
   font-size: 18px;
   font-weight: bold;
   color: #059669;
+}
+.expense-delete-btn {
+  margin-left: auto; /* push to the right */
+  background-color: #dc2626; /* red-600 */
+  color: #ffffff; /* white text */
+  border: none;
+  border-radius: 9999px; /* pill shape */
+  padding: 4px 12px; /* vertical + horizontal padding */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.expense-delete-btn:hover {
+  background-color: #b91c1c; /* red-700 on hover */
+  transform: translateY(-1px); /* subtle lift */
 }
