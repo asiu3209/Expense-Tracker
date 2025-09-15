@@ -89,7 +89,10 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
   };
 
   return (
-    <form className="expense-form" onSubmit={handleSubmit}>
+    <form
+      className="bg-white rounded-lg p-6 mb-8 shadow border border-gray-200"
+      onSubmit={handleSubmit}
+    >
       <h3>Add New Expense</h3>
 
       <div className="form-group">
@@ -103,13 +106,14 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             setFormData({ ...formData, description: e.target.value })
           }
           placeholder="What did you spend money on?"
+          className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
         />
         {errors.description && (
-          <span className="error">{errors.description}</span>
+          <span className="text-red text-sm">{errors.description}</span>
         )}
       </div>
 
-      <div className="form-row">
+      <div className="">
         <div className="form-group">
           <label htmlFor="amount">Amount *</label>
           <input
@@ -123,13 +127,17 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             placeholder="0.00"
             step="0.01"
             min="0"
+            className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
           />
-          {errors.amount && <span className="error">{errors.amount}</span>}
+          {errors.amount && (
+            <span className="text-red text-sm">{errors.amount}</span>
+          )}
         </div>
 
         <div className="form-group">
           <label htmlFor="category">Category *</label>
           <select
+            className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
             id="category"
             name="category"
             value={formData.category}
@@ -146,7 +154,9 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             <option value="Shopping">Shopping</option>
             <option value="Other">Other</option>
           </select>
-          {errors.category && <span className="error">{errors.category}</span>}
+          {errors.category && (
+            <span className="text-red text-sm">{errors.category}</span>
+          )}
         </div>
       </div>
 
@@ -158,8 +168,9 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
           name="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+          className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
         />
-        {errors.date && <span className="error">{errors.date}</span>}
+        {errors.date && <span className="text-red text-sm">{errors.date}</span>}
       </div>
 
       <button type="submit" className="submit-button">

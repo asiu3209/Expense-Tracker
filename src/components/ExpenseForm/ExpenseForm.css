@@ -1,4 +1,4 @@
-/* src/components/ExpenseForm/ExpenseForm.css */
+/* src/components/ExpenseForm/ExpenseForm.css
 /* text error */
 .error {
   color: red;
@@ -30,35 +30,6 @@
   font-weight: 500;
   color: #374151;
   margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-  background: white;
-  color: #374151;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-}
-
-.form-group input:hover,
-.form-group select:hover {
-  border-color: #4f46e5;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-}
-
-.form-group input::placeholder {
-  color: #9ca3af;
 }
 
 .form-actions {
@@ -112,19 +83,6 @@
 
 .btn:disabled:hover {
   transform: none;
-}
-
-/* Form validation styles */
-.form-group.error input,
-.form-group.error select {
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-.form-error {
-  color: #ef4444;
-  font-size: 12px;
-  margin-top: 4px;
 }
 
 /* Mobile responsiveness */
