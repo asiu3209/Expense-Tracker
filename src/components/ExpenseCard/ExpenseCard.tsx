@@ -36,7 +36,6 @@ function ExpenseCard({
   date,
   onDelete,
   highlighted = false, //future implementation
-  showCategory = true, //future implementation
 }: ExpenseCardProps) {
   // Format currency for professional display
   const formattedAmount = new Intl.NumberFormat("en-US", {
@@ -60,7 +59,9 @@ function ExpenseCard({
   }
 
   return (
-    <article className="expense-card">
+    <article
+      className={`expense-card ${highlighted} && expense-card--highlighted`}
+    >
       <div className="expense-header">
         <span className="expense-category">{category}</span>
         <time className="expense-date" dateTime={date}>
@@ -73,13 +74,13 @@ function ExpenseCard({
         <p className="expense-amount">{formattedAmount}</p>
 
         {onDelete && (
-            <button
+          <button
             className="expense-delete-btn"
             onClick={handleDelete}
             aria-label="Delete-expense"
-            >
+          >
             Delete
-            </button>
+          </button>
         )}
       </div>
     </article>

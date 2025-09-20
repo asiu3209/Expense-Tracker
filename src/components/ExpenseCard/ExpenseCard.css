@@ -7,7 +7,12 @@
   transition: transform 0.2s, box-shadow 0.2s;
   border-left: 4px solid #4f46e5;
 }
-
+.expense-card--highlighted{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
 .expense-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
