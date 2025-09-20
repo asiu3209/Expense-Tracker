@@ -1,7 +1,5 @@
-// src/components/ExpenseCard/ExpenseCard.tsx
-import "./ExpenseCard.css";
-
 //Type restriction for inputs
+
 export type ExpenseCategory =
   | "Food"
   | "Transportation"
@@ -25,7 +23,7 @@ export interface ExpenseCardProps {
  * @param {string} props.id - Unique identifier for the expense entry
  * @param {string} props.description - Human-readable description of the expense
  * @param {number} props.amount - Expense amount in dollars (will be formatted as currency)
- * @param {string} props.category - Expense category for organization and filtering
+ * @param {string} props.category - Expense category fonr organization and filtering
  * @param {string} props.date - Date when expense occurred (ISO string format)
  */
 function ExpenseCard({
@@ -60,22 +58,37 @@ function ExpenseCard({
 
   return (
     <article
-      className={`expense-card ${highlighted} && expense-card--highlighted`}
+      className={`
+    bg-white rounded-lg p-4 mb-3 shadow-md
+    hover:shadow-lg transition-all duration-200
+    border-l-4 relative cursor-pointer
+    ${highlighted ? "border-l-orange-500 bg-orange-50" : "border-l-blue-500"}
+`}
     >
-      <div className="expense-header">
-        <span className="expense-category">{category}</span>
-        <time className="expense-date" dateTime={date}>
+      <div className="flex justify-between items-center mb-2">
+        <span className="inline-block bg-blue-500 text-white px-2 py-1 rounded text-xs font-semibold uppercase">
+          {category}
+        </span>
+        <time className="text-sm text-gray-500" dateTime={date}>
           {formattedDate}
         </time>
       </div>
 
-      <div className="">
-        <h3 className="expense-description">{description}</h3>
-        <p className="expense-amount">{formattedAmount}</p>
+      <div className="space-y-2">
+        <h3 className="text-base font-medium text-gray-900">{description}</h3>
+        <p className="text-lg font-bold text-green-600">{formattedAmount}</p>
 
         {onDelete && (
           <button
-            className="expense-delete-btn"
+            className="
+              absolute top-2 right-2
+              bg-red-500 hover:bg-red-600
+              text-white border-0 rounded-full
+              w-6 h-6 cursor-pointer text-base
+              flex items-center justify-center
+              transition-colorßs duration-200
+              focus:outline-none focus:ring-2 focus:ring-red-400
+            "
             onClick={handleDelete}
             aria-label="Delete-expense"
           >

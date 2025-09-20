@@ -4,7 +4,6 @@ import ExpenseSummary from "./components/ExpenseSummary/ExpenseSummary";
 import ExpenseList from "./components/ExpenseList/ExpenseList";
 import ExpenseForm from "./components/ExpenseForm/ExpenseForm";
 import type { ExpenseCategory } from "./components/ExpenseCard/ExpenseCard";
-import "./App.css";
 
 // Type for expense data
 interface Expense {
@@ -19,7 +18,7 @@ interface Expense {
 }
 
 function App() {
-  //Storage of expenses and used across all functions and components throughout application 
+  //Storage of expenses and used across all functions and components throughout application
   const [expenses, setExpenses] = useState<Expense[]>([
     {
       id: "1",
@@ -64,8 +63,8 @@ function App() {
   );
 
   return (
-    <div className="App">
-      <div className="app-container">
+    <div className="flex flex-col justify-center items-center min-h-screen w-full bg-slate-50">
+      <div className="max-w-[1200px] mx-auto p-5 w-full">
         <Header
           title="Expense Tracker"
           subtitle="Manage your spending with confidence"

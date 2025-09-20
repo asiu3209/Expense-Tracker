@@ -1,9 +1,4 @@
-/* src/components/ExpenseForm/ExpenseForm.css
-/* text error */
-.error {
-  color: red;
-  font-size: 14px;
-}
+
 .expense-form {
   background: white;
   border-radius: 8px;
