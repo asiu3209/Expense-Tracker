@@ -4,6 +4,8 @@ import ExpenseSummary from "./components/ExpenseSummary/ExpenseSummary";
 import ExpenseList from "./components/ExpenseList/ExpenseList";
 import ExpenseForm from "./components/ExpenseForm/ExpenseForm";
 import type { ExpenseCategory } from "./components/ExpenseCard/ExpenseCard";
+import LoginForm from "./components/AccountComponents/LoginForm";
+import SignUpForm from "./components/AccountComponents/SignupForm";
 
 // Type for expense data
 interface Expense {
@@ -82,6 +84,10 @@ function App() {
             deleteExpense={handleDeleteExpense}
           />
         </main>
+        <div className="flex flex-row">
+          <LoginForm></LoginForm>
+          <SignUpForm></SignUpForm>
+        </div>
       </div>
     </div>
   );
