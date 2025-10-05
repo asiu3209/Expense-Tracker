@@ -11,21 +11,12 @@ export interface ExpenseCardProps {
   amount: number; // Cost in dollars (will be formatted to show currency)
   category: ExpenseCategory; // Type of expense (e.g., "Food", "Transportation")
   date: string; // When the expense occurred (formatted as string)
-  onDelete?: (id: string) => void;
-  onEdit?: (id: string) => void;
+  onDelete?: (id: string) => void; // A function that will delete the expense
+  onEdit?: (id: string) => void; // A function that will edit the selected expense
   showCategory?: boolean;
   highlighted?: boolean;
 }
 
-/**
- * Displays a single expense item with formatted currency and professional styling
- * @param {Object} props - Component props
- * @param {string} props.id - Unique identifier for the expense entry
- * @param {string} props.description - Human-readable description of the expense
- * @param {number} props.amount - Expense amount in dollars (will be formatted as currency)
- * @param {string} props.category - Expense category fonr organization and filtering
- * @param {string} props.date - Date when expense occurred (ISO string format)
- */
 function ExpenseCard({
   id,
   description,
