@@ -4,6 +4,8 @@ import googleIcon from "/src/assets/google.svg";
 function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   return (
     <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-md w-full max-w-xl">
       <h2 className="text-2xl font-bold mb-4">Sign Up For An Account</h2>
@@ -11,6 +13,13 @@ function SignUpForm() {
         Enter your email to sign up for Smart Trip
       </div>
       <form className="space-y-4">
+        <input
+          type="name"
+          placeholder="First and Last Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+        />
         <input
           type="email"
           placeholder="email@domain.com"
