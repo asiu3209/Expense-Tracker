@@ -81,12 +81,13 @@ function ExpenseCard({
         {onDelete && (
           <button
             className="
-              absolute top-2 right-2
+              absolute
+              bottom-4 right-4
               bg-red-500 hover:bg-red-600
-              text-white border-0 rounded-full
-              w-6 h-6 cursor-pointer text-base
+              text-white border-0 rounded-lg
+              w-16 h-6 cursor-pointer text-base
               flex items-center justify-center
-              transition-colorßs duration-200
+              transition-colors duration-200
               focus:outline-none focus:ring-2 focus:ring-red-400
             "
             onClick={handleDelete}
