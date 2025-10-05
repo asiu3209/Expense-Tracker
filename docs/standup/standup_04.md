@@ -1,4 +1,4 @@
-# Standup - Week 4 and 5
+# Standup - Week 4
 
 ## What I Completed
 
@@ -11,8 +11,11 @@
 
 - [ ] Local storage for data persistence
 - [ ] Basic analytics dashboard
+- [ ] Login form components and login page
 
 ## Blockers
+
+- How to implement a login system using a database and not just storing usernames and passwords in a plain file.
 
 ## Learning Goals This Week
 
