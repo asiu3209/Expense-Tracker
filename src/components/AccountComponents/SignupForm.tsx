@@ -1,4 +1,5 @@
 import { useState } from "react";
+import googleIcon from "/src/assets/google.svg";
 
 function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -36,11 +37,7 @@ function SignUpForm() {
           type="button"
           className="w-full flex items-center justify-center border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition"
         >
-          <img
-            src="https://www.svgrepo.com/show/355037/google.svg"
-            alt="google icon"
-            className="w-5 h-5 mr-2"
-          />
+          <img src={googleIcon} alt="google icon" className="w-5 h-5 mr-2" />
           <span className="font-medium">Google</span>
         </button>
       </form>

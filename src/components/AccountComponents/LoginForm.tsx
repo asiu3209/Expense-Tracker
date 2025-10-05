@@ -1,8 +1,9 @@
 import { useState } from "react";
+import googleIcon from "/src/assets/google.svg";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""); // User inputed email
+  const [password, setPassword] = useState(""); // User inputed password
 
   return (
     <div className="flex flex-col items-center p-8 bg-white rounded-2xl shadow-lg w-full max-w-xl">
@@ -41,16 +42,11 @@ function LoginForm() {
           <hr className="flex-grow border-gray-300" />
         </div>
 
-        {/* Google button */}
         <button
           type="button"
           className="w-full flex items-center justify-center border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition"
         >
-          <img
-            src="https://www.svgrepo.com/show/355037/google.svg"
-            alt="google icon"
-            className="w-5 h-5 mr-2"
-          />
+          <img src={googleIcon} alt="google icon" className="w-5 h-5 mr-2" />
           <span className="font-medium">Google</span>
         </button>
       </form>
