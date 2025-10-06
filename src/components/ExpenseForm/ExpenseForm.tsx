@@ -1,6 +1,5 @@
 // src/components/ExpenseForm/ExpenseForm.tsx
 import React, { useState } from "react";
-import "./ExpenseForm.css";
 import type { ExpenseCategory } from "../ExpenseCard/ExpenseCard";
 
 // Form data interface
@@ -90,13 +89,20 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
 
   return (
     <form
-      className="bg-white rounded-lg p-6 mb-8 shadow border border-gray-200"
+      className="bg-white rounded-lg p-6 mb-8 shadow-sm border border-gray-200"
       onSubmit={handleSubmit}
     >
-      <h3>Add New Expense</h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-5">
+        Add New Expense
+      </h3>
 
-      <div className="form-group">
-        <label htmlFor="description">Description *</label>
+      <div className="mb-4">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700 mb-1.5"
+        >
+          Description *
+        </label>
         <input
           type="text"
           id="description"
@@ -106,16 +112,34 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             setFormData({ ...formData, description: e.target.value })
           }
           placeholder="What did you spend money on?"
-          className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
+          className={`
+            w-full px-3 py-2.5 
+            border rounded-md
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+            placeholder-gray-400 text-sm bg-white
+            transition-colors duration-200
+            ${
+              errors.description
+                ? "border-red-300 focus:ring-red-500"
+                : "border-gray-300"
+            }
+          `}
         />
         {errors.description && (
-          <span className="text-red text-sm">{errors.description}</span>
+          <span className="text-red-500 text-xs mt-1 block">
+            {errors.description}
+          </span>
         )}
       </div>
 
-      <div className="">
-        <div className="form-group">
-          <label htmlFor="amount">Amount *</label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label
+            htmlFor="amount"
+            className="block text-sm font-medium text-gray-700 mb-1.5"
+          >
+            Amount *
+          </label>
           <input
             type="number"
             id="amount"
@@ -127,17 +151,34 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             placeholder="0.00"
             step="0.01"
             min="0"
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
+            className={`
+              w-full px-3 py-2.5 
+              border rounded-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+              placeholder-gray-400 text-sm bg-white
+              transition-colors duration-200
+              ${
+                errors.amount
+                  ? "border-red-300 focus:ring-red-500"
+                  : "border-gray-300"
+              }
+            `}
           />
           {errors.amount && (
-            <span className="text-red text-sm">{errors.amount}</span>
+            <span className="text-red-500 text-xs mt-1 block">
+              {errors.amount}
+            </span>
           )}
         </div>
 
-        <div className="form-group">
-          <label htmlFor="category">Category *</label>
+        <div>
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-gray-700 mb-1.5"
+          >
+            Category
+          </label>
           <select
-            className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
             id="category"
             name="category"
             value={formData.category}
@@ -147,6 +188,18 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
                 category: e.target.value as ExpenseCategory,
               })
             }
+            className={`
+              w-full px-3 py-2.5 
+              border rounded-md
+              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+              text-sm bg-white cursor-pointer
+              transition-colors duration-200
+              ${
+                errors.category
+                  ? "border-red-300 focus:ring-red-500"
+                  : "border-gray-300"
+              }
+            `}
           >
             <option value="Food">Food</option>
             <option value="Transportation">Transportation</option>
@@ -155,25 +208,54 @@ function ExpenseForm({ onSubmit }: ExpenseFormProps) {
             <option value="Other">Other</option>
           </select>
           {errors.category && (
-            <span className="text-red text-sm">{errors.category}</span>
+            <span className="text-red-500 text-xs mt-1 block">
+              {errors.category}
+            </span>
           )}
         </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="date">Date *</label>
+      <div className="mb-6">
+        <label
+          htmlFor="date"
+          className="block text-sm font-medium text-gray-700 mb-1.5"
+        >
+          Date
+        </label>
         <input
           type="date"
           id="date"
           name="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-          className="w-full px-3 py-2.5 border border-gray-300 rounded-md text-sm bg-white text-gray-700 placeholder-gray-400 transition-colors duration-200 hover:border-indigo-600 focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-600/10"
+          className={`
+            w-full px-3 py-2.5 
+            border rounded-md
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+            text-sm bg-white
+            transition-colors duration-200
+            ${
+              errors.date
+                ? "border-red-300 focus:ring-red-500"
+                : "border-gray-300"
+            }
+          `}
         />
-        {errors.date && <span className="text-red text-sm">{errors.date}</span>}
+        {errors.date && (
+          <span className="text-red-500 text-xs mt-1 block">{errors.date}</span>
+        )}
       </div>
 
-      <button type="submit" className="submit-button">
+      <button
+        type="submit"
+        className="
+          w-full bg-blue-500 hover:bg-blue-600 
+          text-white font-medium py-3 px-4 
+          rounded-md transition-colors duration-200
+          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+          disabled:opacity-50 disabled:cursor-not-allowed
+        "
+      >
         Add Expense
       </button>
     </form>
