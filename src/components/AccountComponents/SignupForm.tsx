@@ -1,10 +1,29 @@
 import { useState } from "react";
 import googleIcon from "/src/assets/google.svg";
 
+interface SignUpFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
 function SignUpForm() {
+  //Old way of storing user inputed information
+  /*
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  */
+
+  //Form state saving user inputed data and updated as input is typed
+  const [signUpData, setSignUpData] = useState<SignUpFormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
   return (
     <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-md w-full max-w-xl">
@@ -14,27 +33,45 @@ function SignUpForm() {
       </div>
       <form className="space-y-4">
         <input
-          type="name"
-          placeholder="First and Last Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          type="firstName"
+          placeholder="First Name"
+          value={signUpData.firstName}
+          onChange={(e) =>
+            setSignUpData({ ...signUpData, firstName: e.target.value })
+          }
+          className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+        />
+        <input
+          type="lastName"
+          placeholder="Last Name"
+          value={signUpData.lastName}
+          onChange={(e) =>
+            setSignUpData({ ...signUpData, lastName: e.target.value })
+          }
           className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
         />
         <input
           type="email"
           placeholder="email@domain.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={signUpData.email}
+          onChange={(e) =>
+            setSignUpData({ ...signUpData, email: e.target.value })
+          }
           className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
         />
         <input
           type="password"
           placeholder="Enter your password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={signUpData.password}
+          onChange={(e) =>
+            setSignUpData({ ...signUpData, password: e.target.value })
+          }
           className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black"
         />
-        <button className="bg-black text-white rounded-lg w-full font-medium py-2 hover:bg-gray-800 transition">
+        <button
+          type="submit"
+          className="bg-black text-white rounded-lg w-full font-medium py-2 hover:bg-gray-800 transition"
+        >
           Sign up with email
         </button>
         <div className="flex items-center my-4">
