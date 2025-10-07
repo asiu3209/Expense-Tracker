@@ -33,11 +33,18 @@ function ExpenseCard({
   }).format(amount);
 
   // Format date for user-friendly display
-  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  const [year, month, day] = date.split("-").map(Number);
+  const dateObj = new Date(year, month - 1, day);
+  const formattedDate = dateObj.toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   });
+  // const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  //   month: "short",
+  //   day: "numeric",
+  //   year: "numeric",
+  // });
 
   //Handles deleting expense card if option is available
   function handleDelete(e: React.MouseEvent) {
