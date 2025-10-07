@@ -59,6 +59,15 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
         >
           Settings
         </button>
+        <button
+          className="
+            bg-white/10 border border-white/20 text-white 
+            px-4 py-2.5 rounded-md text-sm font-medium cursor-pointer 
+            transition-all duration-200 
+            hover:bg-white/20 hover:-translate-y-0.5"
+        >
+          Log In
+        </button>
       </nav>
     </header>
   );
